@@ -1,38 +1,26 @@
-const { app, Menu, BrowserWindow } = require('electron');
-const path = require('path');
-const url = require('url');
+const electron = require("electron");
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+
 
 let mainWindow;
 
-function createWindow() {
-    mainWindow = new BrowserWindow({ width: 800, height: 600 });
-
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-    // 開発ツールを有効化
-    // mainWindow.webContents.openDevTools();
-
-    Menu.setApplicationMenu(null);
-
-    mainWindow.on('closed', () => {
-        mainWindow = null;
-    });
-}
-
-app.on('ready', createWindow);
-
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+app.on('window-all-closed', function() {
+  if (process.platform != 'darwin') {
+    app.quit();
+  }
 });
 
-app.on('activate', () => {
-    if (mainWindow === null) {
-        createWindow();
-    }
+app.on('ready', function() {
+  mainWindow = new BrowserWindow({width: 800, height: 600, 
+    webPreferences:{
+        nodeIntegration: true,
+        contextIsolation: false
+    }});
+  //mainWindow.webContents.openDevTools()
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+  mainWindow.on('closed', function() {
+    mainWindow = null;
+  });
 });

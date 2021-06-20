@@ -5,13 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MY ELECTRON</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-        crossorigin="anonymous">
+    <title>Sign</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Hello, World!</h1>
+	<div class="container">
+		<div class="row">
+			<h2>Generate Keys</h2>
+			<button type="button" class="btn btn-primary" id="generate" onclick="genKey()">Generate</button>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+			<h2>Sign to File</h2>
+			<form>
+				<div class="mb-3">
+					<label for="data" class="form-label">Data File</label>
+					<input type="file" class="form-control" id="s_data">
+				</div>
+				<div class="mb-3">
+					<label for="private" class="form-label">Private Key</label>
+					<input type="file" class="form-control" id="s_private">
+				</div>
+				<button type="button" class="btn btn-primary" id="submit" onclick="signFile()">Sign</button>
+			</form>
+			</div>
+			<div class="col-md-6">
+			<h2>Verify the Sign</h2>
+			<form>
+				<div class="mb-3">
+					<label for="data" class="form-label">Data File</label>
+					<input type="file" class="form-control" id="v_data">
+				</div>
+				<div class="mb-3">
+					<label for="sign" class="form-label">Sign File</label>
+					<input type="file" class="form-control" id="v_sign" >
+				</div>
+				<div class="mb-3">
+					<label for="public" class="form-label">Public Key</label>
+					<input type="file" class="form-control" id="v_public">
+				</div>
+				<button type="button" class="btn btn-primary" id="submit" style="float: left" onclick="verify()">Verify</button>
+				<div id="result" style="float: left"></div>
+			</form>
+		</div>
+		</div>
+	  </div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	<script src="sign.js"></script>
 </body>
 
 </html>
